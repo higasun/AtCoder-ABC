@@ -1,9 +1,9 @@
-N, K = map(int, input().split())
+n, k = map(int, input().split())
 
-for i in range(K):
-    if N % 200 == 0:
-        N //= 200
+for i in range(k):
+    if n % 200 == 0:
+        n = n // 200
     else:
-        N = 1000 * N + 200
+        n = n * 1000 + 200
 
-print(N)
+print(n)

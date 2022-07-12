@@ -1,18 +1,15 @@
-from collections import defaultdict
+n = int(input())
+a = [int(x) for x in input().split()]
 
+def c(x):
+    return x * (x - 1) // 2
 
-N = int(input())
-A = [int(x) for x in input().split()]
+cnt = [0]*200
+for i in range(n):
+    cnt[a[i]%200] += 1
 
-def f(n: int):
-    return n * (n-1) // 2
+ans = 0
+for i in range(200):
+    ans += c(cnt[i])
 
-d = defaultdict(int)
-for i in range(N):
-    d[A[i] % 200] += 1
-
-cnt = 0
-for k, v in d.items():
-    cnt += f(v)
-
-print(cnt)
+print(ans)
