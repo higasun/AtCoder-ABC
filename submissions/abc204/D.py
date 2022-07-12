@@ -1,19 +1,20 @@
 from bisect import bisect_left
 
-
 n, q = map(int, input().split())
 a = [int(x) for x in input().split()]
-a.append(1e+20)
+
+def count(x):
+    return x - (bisect_left(a, x) + 1)
+
+def binary_search(l, r):
+    while r - l > 1:
+        m = (r+l) // 2
+        cnt = count(m)
+        if cnt >= k: r = m
+        else: l = m
+    return l
 
 for _ in range(q):
     k = int(input())
-
-    l = 0
-    r = int(1e+19 + 1)
-    while r - l > 1:
-        m = (r+l) // 2
-        cnt = m - (bisect_left(a, m) + 1)
-        if cnt >= k: r = m
-        else: l = m
-    
-    print(l)
+    ans = binary_search(0, 10**19)
+    print(ans)
