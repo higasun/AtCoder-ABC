@@ -1,20 +1,20 @@
-from bisect import bisect_left
+n = int(input())
+t = [int(x) for x in input().split()]
+s = sum(t)
 
-n, q = map(int, input().split())
-a = [int(x) for x in input().split()]
+dp = [[False]*(s+1) for _ in range(n+1)]
+dp[0][0] = True
 
-def count(x):
-    return x - (bisect_left(a, x) + 1)
+for i in range(n):
+    for j in range(s+1):
+        if dp[i][j]:
+            dp[i+1][j] = True
+            if j+t[i] <= s:
+                dp[i+1][j+t[i]] = True
 
-def binary_search(l, r):
-    while r - l > 1:
-        m = (r+l) // 2
-        cnt = count(m)
-        if cnt >= k: r = m
-        else: l = m
-    return l
+ans = float('inf')
+for i in range(s+1):
+    if dp[n][i]:
+        ans = min(ans, max(i, s-i))
 
-for _ in range(q):
-    k = int(input())
-    ans = binary_search(0, 10**19)
-    print(ans)
+print(ans)

@@ -1,2 +1,4 @@
-a, b = map(int, input().split())
-print(b / 100 * a)
+x, y = input().split()
+
+if x == y: print(x)
+else: print(3 - (int(x)+int(y)))
