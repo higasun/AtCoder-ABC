@@ -48,3 +48,7 @@ class WeightedUnionFind:
 
     def size(self, x):
         return self.siz[self.root(x)]
+
+    # 頂点のリスト
+    def roots(self):
+        return [i for i, x in enumerate(self.parents) if x < 0]

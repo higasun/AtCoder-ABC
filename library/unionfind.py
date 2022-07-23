@@ -5,7 +5,7 @@ class UnionFind:
         self.siz = [1]*n
 
     def root(self, x):
-        if self.parents[x] == -1:
+        if self.parents[x] < 0:
             return x
         else:
             self.parents[x] = self.root(self.parents[x])
@@ -22,14 +22,15 @@ class UnionFind:
             return False
 
         if self.size(x) < self.size(y):
-            tmp = x
-            x = y
-            y = tmp
+            x, y = y, x
         
-        self.parents[y] = x
         self.siz[x] += self.siz[y]
+        self.parents[y] = x
         return True
         
     def size(self, x):
         return self.siz[self.root(x)]
 
+    # 頂点のリスト
+    def roots(self):
+        return [i for i, x in enumerate(self.parents) if x < 0]
